@@ -1,0 +1,26 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/Sidebar.astro';
+import Search from 'virtual:starlight/components/Search';
+import SiteTitle from 'virtual:starlight/components/SiteTitle';
+import MobileMenuFooter from 'virtual:starlight/components/MobileMenuFooter';
+import Logo from '../components/Logo.tsx'
+
+import config from 'virtual:starlight/user-config';
+
+const shouldRenderSearch = config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
+console.log(config)
+---
+
+<div class="sidebar-top">
+  <div class="title-wrapper ">
+    <Logo client:load {...config}/>
+    <!--<SiteTitle {...Astro.props} />-->
+  </div>
+
+  {shouldRenderSearch && <Search {...Astro.props} />}
+
+  <MobileMenuFooter {...Astro.props} />
+</div>
+
+<Default {...Astro.props}><slot /></Default>

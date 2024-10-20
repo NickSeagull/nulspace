@@ -19,3 +19,9 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+public/notes/
+src/content/docs/notes
+src/assets/
+src/.obsidian/
+content/.obsidian/

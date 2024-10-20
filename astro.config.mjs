@@ -1,28 +1,41 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import starlightObsidian, { obsidianSidebarGroup } from 'starlight-obsidian'
+import starlightThemeObsidian from 'starlight-theme-obsidian'
+
+
+import react from '@astrojs/react';
+
 
 // https://astro.build/config
 export default defineConfig({
-	integrations: [
-		starlight({
-			title: 'My Docs',
-			social: {
-				github: 'https://github.com/withastro/starlight',
-			},
-			sidebar: [
-				{
-					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
-					],
-				},
-				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
-				},
-			],
-		}),
-	],
+  site: "https://nickseagull.dev",
+  integrations: [starlight({
+    title: 'nulspace',
+    components: {
+      Sidebar: './src/overrides/Sidebar.astro'
+    },
+    social: {
+      github: 'https://github.com/nickseagull/',
+      linkedin: 'https://www.linkedin.com/in/nickseagull/',
+      twitter: 'https://x.com/NickSeagull',
+      twitch: 'https://www.twitch.tv/codeseagull',
+      youtube: 'https://www.youtube.com/@CodeSeagull',
+      mastodon: 'https://mastodon.social/@NickSeagull'
+    },
+    sidebar: [
+      obsidianSidebarGroup,
+    ],
+    plugins: [
+      // Generate the Obsidian vault pages.
+      starlightObsidian({
+        vault: './content',
+        sidebar: {
+          label: "nulspace"
+        },
+      }),
+      starlightThemeObsidian()
+    ],
+  }), react()],
 });
